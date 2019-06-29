@@ -8,7 +8,7 @@
     "url": "https://github.com/RetoWeberHSR/CAS_FEE_2019_Project1.git"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Reto Weber",
