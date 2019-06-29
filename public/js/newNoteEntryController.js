@@ -1,6 +1,6 @@
 "use strict";
 
-import { datamodel as model } from './model.js';
+import { datamodel as model } from './dataModel.js/index.js';
 import { NoteEntry } from './dataNoteEntry.js';
 
 

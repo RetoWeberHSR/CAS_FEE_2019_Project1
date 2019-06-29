@@ -15,7 +15,6 @@ const stylemodel = {
 function _getCSSLink(styleSelectBoxId){
     // default selection value
     let selectedValue;
-    let style;
     if (styleSelectBoxId !== null){
         selectedValue = styleSelectBoxId.options[styleSelectBoxId.selectedIndex].value;
     } else {
@@ -57,7 +56,4 @@ function _getLastSelectedStyleValueAndSetItToSelectBox(styleBoxId){
     return "white";
 }
 
-/**
- * Exposed API facilities.
- */
 export  { stylemodel };

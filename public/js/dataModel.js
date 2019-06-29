@@ -56,7 +56,7 @@ function _storeEntries(listOfEntries){
 
 function _storeEntry(noteEntry){
     // send entry to the server
-    fetch('http:/127.0.0.1.3201/', {
+    fetch('http:/127.0.0.1.3001/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(noteEntry)
