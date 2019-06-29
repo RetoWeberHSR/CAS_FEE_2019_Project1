@@ -1,4 +1,4 @@
-import  {store} from "../services/store_noteEntries";
+import {noteStore as store} from "../services/store_noteEntries";
 
 const actor = "somebody";
 
