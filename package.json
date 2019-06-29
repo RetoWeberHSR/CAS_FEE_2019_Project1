@@ -1,0 +1,22 @@
+{
+  "name": "CAS-FEE-Project1-2019",
+  "version": "1.0.0",
+  "description": "CAS FEE Project 1, Reto Weber, 2019",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RetoWeberHSR/CAS_FEE_2019_Project1.git"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Reto Weber",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1"
+  }
+}

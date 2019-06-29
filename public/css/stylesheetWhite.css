@@ -1,0 +1,31 @@
+/* contains white style settings */
+
+.button {
+    font-style: normal;
+    text-align: center;
+    border-radius: 4px;
+    padding: 4px 4px;
+    border: 1px solid black;
+    min-width: 96px;
+}
+
+.editbutton {
+    font-style: normal;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px 10px;
+    border: 1px solid black;
+    min-width: 88px;
+}
+
+.inputborder{
+    border-radius: 4px;
+    padding: 4px 4px;
+    border: 1px solid black;
+}
+
+body {
+    background-color: whitesmoke;
+    color: inherit;
+}
+

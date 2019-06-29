@@ -1,0 +1,39 @@
+/* contains white style settings */
+
+.button {
+    color: midnightblue;
+    font-style: normal;
+    text-align: center;
+    background-color: lightgray;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 12px 12px;
+    border: 1px solid darkgreen;
+    min-width: 96px;
+}
+
+.editbutton {
+    color: midnightblue;
+    font-style: normal;
+    text-align: center;
+    background-color: lightgray;
+    border-radius: 8px;
+    padding: 12px 12px;
+    border: 1px solid darkgreen;
+    min-width: 88px;
+}
+
+.inputborder{
+    border-radius: 8px;
+    padding: 4px 4px;
+    border: 1px solid darkgreen;
+}
+
+body {
+    background-color: #c9fb17;
+    color: #7508ff;
+}
+
+
+
+

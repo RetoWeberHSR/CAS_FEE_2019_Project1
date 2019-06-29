@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Note Pro - Edit Entry</title>
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/basics.css">
+    <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
+    <link rel="stylesheet" type="text/css" href="css/newNoteEntry.css">
+</head>
+<body>
+<main class="newEntry">
+    <h2>Notiz erfassen / ändern</h2>
+    <input id="entrykey" value="0" hidden="true">
+    <section class="row">
+        <label>Title</label><input class="inputborder" id="title">
+    </section>
+    <section class="row">
+        <label>Beschreibung</label><textarea class="inputborder" id="description"></textarea>
+    </section>
+    <section class="row">
+        <label>Wichtigkeit</label><input class="inputborder" id="importance">
+    </section>
+    <section class="row">
+        <label>Erledigt bis</label><input class="inputborder" id="done_until">
+    </section>
+    <section class="row">
+        <label>Abgeschlossen</label><input type="checkbox" class="inputborder" id="task_finished">
+    </section>
+    <section class="creation" hidden="true">
+        <label>Erfasst</label><input class="inputborder" id="creation_date">
+    </section>
+</main>
+<aside class="buttonsNewEntry">
+    <button class="button" id="saveButton">Speichern</button>
+    <span></span><button class="button" id="cancelButton">Cancel</button>
+</aside>
+
+<script type="module" src="js/dataNoteEntry.js"></script>
+<script type="module" src="js/model.js"></script>
+<script type="module" src="js/newNoteEntryController.js"></script>
+<script type="module" src="js/StyleSheetModule.js"></script>
+
+<script type="module">
+
+    import { Controller } from './js/newNoteEntryController.js';
+    // bootstrapping
+    window.onload = function () {
+        Controller.bootstrap(
+            document
+        );
+    }
+
+</script>
+
+</body>
+</html>

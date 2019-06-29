@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Note Pro</title>
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/basics.css">
+    <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <header class="button_region">
+        <div class="hrow1">
+            <button data-entry_key="0" class="button">Create new note</button>
+            <span></span>
+            <select id="style_box" class="button" value="white">
+                <option value="white">BlockWhite-Style</option>
+                <option value="green">BlockGreen-Style</option>
+            </select>
+        </div>
+        <div class="hrow2">
+            <button class="button" data-order_by="finished">By finish date</button>
+            <button class="button" data-order_by="creationdate">created date</button>
+            <button class="button" data-order_by="importance">By importance</button>
+            <button class="button" data-order_by="show_finished">Show finished</button>
+        </div>
+    </header>
+    <main id="notetable">
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+        <script id="notetable-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <section class="entry_row">
+                <div class="txtcol">{{this.nDue}}</div><div class="txtcol">{{this.nTitle}}</div>
+                <div class="txtcol">{{this.nImportence}}</div>
+                <label>finished<input type="checkbox" protected="true" value="{{this.nFinished}}"></label>
+                    <textarea readonly>{{this.nDescription}}</textarea>
+                <button data-entry_key="{{this._id}}" class="editbutton">Edit</button>
+            </section>
+            {{/each}}
+        </script>
+
+    </main>
+
+    <script type="module" src="js/dataNoteEntry.js"></script>
+    <script type="module" src="js/dataModel.js"></script>
+    <script type="module" src="js/indexController.js"></script>
+    <script type="module" src="js/StyleSheetModule.js"></script>
+
+    <script type="module">
+        const createNoteTable = Handlebars.compile(document.getElementById("notetable-template").innerText);
+
+        import { Controller } from './js/indexController.js';
+
+        // bootstrapping
+        window.onload = function () {
+            Controller.bootstrap(
+                document
+            );
+            renderUI();
+        }
+
+        function renderUI(){
+            document.getElementById("notetable").innerHTML=createNoteTable(Controller.getStoredEntries());
+        }
+    </script>
+
+</body>
+</html>
