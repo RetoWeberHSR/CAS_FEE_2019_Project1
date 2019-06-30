@@ -11,29 +11,36 @@
 <body>
 <main class="newEntry">
     <h2>Notiz erfassen / ändern</h2>
-    <input id="entrykey" value="0" hidden="true">
+    <input id="entry_key" value="0" hidden="true">
     <section class="row">
-        <label>Title</label><input class="inputborder" id="title">
+        <label for="title">Title</label>
+        <input class="inputborder" id="title">
     </section>
     <section class="row">
-        <label>Beschreibung</label><textarea class="inputborder" id="description"></textarea>
+        <label for="description">Beschreibung</label>
+        <textarea class="inputborder" id="description"></textarea>
     </section>
     <section class="row">
-        <label>Wichtigkeit</label><input class="inputborder" id="importance">
+        <label for="importance">Wichtigkeit</label>
+        <input class="inputborder" id="importance">
     </section>
     <section class="row">
-        <label>Erledigt bis</label><input class="inputborder" id="done_until">
+        <label for="done_until">Erledigt bis</label>
+        <input class="inputborder" id="done_until">
     </section>
     <section class="row">
-        <label>Abgeschlossen</label><input type="checkbox" class="inputborder" id="task_finished">
+        <label for="task_finished">Abgeschlossen</label>
+        <input type="checkbox" class="inputborder" id="task_finished">
     </section>
     <section class="creation" hidden="true">
-        <label>Erfasst</label><input class="inputborder" id="creation_date">
+        <label for="creation_date">Erfasst</label>
+        <input class="inputborder" id="creation_date">
     </section>
 </main>
 <aside class="buttonsNewEntry">
-    <button class="button" id="saveButton">Speichern</button>
-    <span></span><button class="button" id="cancelButton">Cancel</button>
+    <button class="button begin" id="save_button">Speichern</button>
+    <span></span>
+    <button class="button end" id="cancel_button">Cancel</button>
 </aside>
 
 <script type="module" src="js/dataNoteEntry.js"></script>

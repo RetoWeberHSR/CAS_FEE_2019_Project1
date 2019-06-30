@@ -7,9 +7,10 @@
     background-color: lightgray;
     text-decoration: none;
     border-radius: 8px;
-    padding: 12px 12px;
+    padding: 10px 12px;
     border: 1px solid darkgreen;
     min-width: 96px;
+    margin: 1px;
 }
 
 .editbutton {
@@ -18,14 +19,14 @@
     text-align: center;
     background-color: lightgray;
     border-radius: 8px;
-    padding: 12px 12px;
+    padding: 10px 12px;
     border: 1px solid darkgreen;
     min-width: 88px;
 }
 
 .inputborder{
     border-radius: 8px;
-    padding: 4px 4px;
+    padding: 4px;
     border: 1px solid darkgreen;
 }
 

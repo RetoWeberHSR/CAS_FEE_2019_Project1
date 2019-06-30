@@ -1,6 +1,6 @@
 "use strict";
 
-import { datamodel as model } from './dataModel.js/index.js';
+import { datamodel as model } from './dataModel.js';
 import { NoteEntry } from './dataNoteEntry.js';
 
 
@@ -11,7 +11,7 @@ const Controller = {
         renderEntryToUI(view, entry);
 
         // save
-        view.getElementById("saveButton").onclick = function () {
+        view.getElementById("save_button").onclick = function () {
             let noteEntries = model.getStoredEntries();
             let entry = getRenderedEntry(view);
             if (entry._id == 0){
@@ -25,7 +25,7 @@ const Controller = {
             window.location.replace("index.html");
         };
         // cancel
-        view.getElementById("cancelButton").onclick = function () {
+        view.getElementById("cancel_button").onclick = function () {
             window.location.replace("index.html");
         };
     }
@@ -33,7 +33,7 @@ const Controller = {
 
 function getRenderedEntry(view) {
     let entry = new NoteEntry(
-        view.getElementById("entrykey").value,
+        view.getElementById("entry_key").value,
         view.getElementById("done_until").value,
         view.getElementById("title").value,
         view.getElementById("importance").value,
@@ -46,7 +46,7 @@ function getRenderedEntry(view) {
 
 function renderEntryToUI(view, entry){
     if (entry !== undefined){
-        view.getElementById("entrykey").value = entry._id;
+        view.getElementById("entry_key").value = entry._id;
         view.getElementById("done_until").value = entry.nDue;
         view.getElementById("title").value = entry.nTitle;
         view.getElementById("importance").value = entry.nImportence;

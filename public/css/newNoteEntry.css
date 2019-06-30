@@ -44,12 +44,12 @@ textarea{
     flex: 2;
 }
 
-#saveButton{
+.button.begin{
     width: 100%;
     flex: 3;
 }
 
-#cancelButton{
+.button.end{
     align-self: flex-end;
 }
 

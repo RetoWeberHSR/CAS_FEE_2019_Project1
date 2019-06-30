@@ -3,10 +3,10 @@ const router = express.Router();
 import {notesController} from '../controller/notesController';
 
 
-router.get("/", notesController.getNoteEntries.bind(notesController));
-router.post("/", notesController.addEntry.bind(notesController));
-router.get("/:id/", notesController.getNoteEntry.bind(notesController));
-router.put("/:id", notesController.updateEntry.bind(notesController));
+router.get("/rest/", notesController.getNoteEntries.bind(notesController));
+router.post("/rest/", notesController.addEntry.bind(notesController));
+router.get("/rest/:id/", notesController.getNoteEntry.bind(notesController));
+router.put("/rest/:id/", notesController.updateEntry.bind(notesController));
 
 
 export const notesRoutes = router;

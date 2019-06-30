@@ -4,9 +4,10 @@
     font-style: normal;
     text-align: center;
     border-radius: 4px;
-    padding: 4px 4px;
+    padding: 4px;
     border: 1px solid black;
     min-width: 96px;
+    margin: 2px;
 }
 
 .editbutton {
@@ -20,7 +21,7 @@
 
 .inputborder{
     border-radius: 4px;
-    padding: 4px 4px;
+    padding: 4px;
     border: 1px solid black;
 }
 
