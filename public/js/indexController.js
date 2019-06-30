@@ -24,7 +24,7 @@ const Controller = {
                 if (orderBy == "finished"){
 
                 }
-                if (orderBy == "creationdate"){
+                if (orderBy == "creation_date"){
 
                 }
                 if (orderBy == "importance"){
@@ -41,6 +41,8 @@ const Controller = {
     getStoredEntries: function () {
          return model.getStoredEntries();
     }
+
+
 };
 
 export  { Controller }

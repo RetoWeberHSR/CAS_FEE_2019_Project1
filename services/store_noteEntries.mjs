@@ -24,7 +24,7 @@ export class NoteStore {
         return await this.db.insert(noteEntry);    
     }
 
-    async update(id, due, title, importence, finished, description) {
+    async updateEntry(id, due, title, importence, finished, description) {
         await this.db.update({_id: id}, {
             $set: {
                 "nDue": due,
@@ -36,11 +36,11 @@ export class NoteStore {
         return await this.get(id);
     }
 
-    async get(id) {
+    async getEntry(id) {
         return await this.db.findOne({_id: id});
     }
 
-    async all() {
+    async allEntries() {
         return await this.db.find({});
     }
 }
