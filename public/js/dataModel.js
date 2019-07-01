@@ -2,18 +2,13 @@
 
 import { stylemodel } from './StyleSheetModule.js';
 
+const sessionNoteEntryKey = "noteAppEntryKey";
+const sessionOrderByKey = "noteAppOrderBy"
+
 const datamodel = {
 
     getStoredEntries: function() {
         return _getStoredEntries();
-    },
-
-    createDataTable: function(entries) {
-        return _createDataTable(entries);
-    },
-
-    storeEntries: function(listOfEntries) {
-        _storeEntries(listOfEntries);
     },
 
     storeEntry: function(noteEntry) {
@@ -21,12 +16,16 @@ const datamodel = {
     },
 
     loadSessionEntryKey: function() {
-        let entryKey = sessionStorage.getItem("noteAppEntryKey");
+        let entryKey = sessionStorage.getItem(sessionNoteEntryKey);
         return _getEntryFromList(entryKey);
     },
 
     storeSessionEntryKey: function(noteKey) {
-        sessionStorage.setItem("noteAppEntryKey", noteKey);
+        sessionStorage.setItem(sessionNoteEntryKey, noteKey);
+    },
+
+    storeOrderBy: function(orderBy) {
+        sessionStorage.setItem(sessionOrderByKey, orderBy);
     },
 
     getCSSLink: function(styleSelectBoxId){
@@ -40,18 +39,32 @@ const datamodel = {
 };
 
 
-function _getStoredEntries(){
-    let noteEntryList = localStorage.getItem("noteAppEntries");
-    if( !noteEntryList )
-    {
-        _storeEntries([]);
-        noteEntryList = localStorage.getItem("noteAppEntries");
-    }
-    return JSON.parse(noteEntryList);
+function _getStoredEntries(entries){
+    return fetch('./rest/', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+    }).then(function(response) {
+        return _sortOrFilterEntries(response.json());
+    });
 }
 
-function _storeEntries(listOfEntries){
-    localStorage.setItem("noteAppEntries", JSON.stringify(listOfEntries));
+function _sortOrFilterEntries(entries) {
+    const orderBy = sessionStorage.getItem(sessionOrderByKey);
+    let entriesSorted;
+    // TODO catch error => JSON.parse etc.
+    if (orderBy == 'finished'){
+        entriesSorted = entries;
+    }
+    else if (orderBy == 'importance'){
+        entriesSorted = entries;
+    }
+    else if (orderBy == 'show_finished'){
+        entriesSorted = entries.filter(entry => entry.nFinished === true);
+    } else {
+        // orderBy == 'creation_date'
+        entriesSorted = entries;
+    }
+    return entriesSorted;
 }
 
 function _storeEntry(noteEntry){
@@ -62,7 +75,7 @@ function _storeEntry(noteEntry){
         body: JSON.stringify(noteEntry)
     }).then(function(res) {
         console.log(res);
-        });
+    });
 }
 
 function _getEntryFromList(searchKey) {

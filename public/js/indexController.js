@@ -14,25 +14,15 @@ const Controller = {
 
         view.body.addEventListener("click", function(event) {
             if (event.target.dataset.entry_key) {
-                let noteKey = event.target.dataset.entry_key;
+                const noteKey = event.target.dataset.entry_key;
                 // load entry to newNoteEntry view for modifing
                 model.storeSessionEntryKey(noteKey);
                 window.location.replace("newNoteEntry.html");
             }
             if (event.target.dataset.order_by) {
-                let orderBy = event.target.dataset.order_by.value;
-                if (orderBy == "finished"){
-
-                }
-                if (orderBy == "creation_date"){
-
-                }
-                if (orderBy == "importance"){
-
-                }
-                if (orderBy == "show_finished"){
-
-                }
+                const orderFlag = event.target.dataset.order_by;
+                model.storeOrderBy(orderFlag);
+                window.location.replace("index.html");
             }
         });
 
@@ -42,7 +32,7 @@ const Controller = {
          return model.getStoredEntries();
     }
 
-
+    
 };
 
 export  { Controller }
