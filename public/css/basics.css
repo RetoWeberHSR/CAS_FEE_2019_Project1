@@ -27,3 +27,7 @@ main {
 span{
     flex: 0.75;
 }
+
+.button.end{
+    align-self: flex-end;
+}

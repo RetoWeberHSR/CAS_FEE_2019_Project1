@@ -2,7 +2,8 @@
   "name": "CAS-FEE_Project1",
   "version": "1.0.0",
   "description": "CAS FEE Project 1, Reto Weber, 2019",
-  "main": "index.js",
+  "type": "module",
+  "main": "./index.mjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/RetoWeberHSR/CAS_FEE_2019_Project1.git"

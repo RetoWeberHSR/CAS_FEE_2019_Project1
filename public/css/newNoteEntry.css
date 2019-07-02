@@ -7,13 +7,13 @@ main {
     justify-content: center;
 }
 
-aside.buttonsNewEntry {
+section.buttonsNewEntry {
     display: flex;
     flex: 3;
     flex-direction: row;
     width: 520px;
     max-width: 520px;
-    margin: 0px auto;
+    margin: 5px auto;
     justify-content: center;
 }
 
@@ -49,11 +49,16 @@ textarea{
     flex: 3;
 }
 
-.button.end{
-    align-self: flex-end;
-}
-
 section.row{
     margin: 2px 0px;
     padding: 4px 0px;
+}
+
+footer {
+    width: 520px;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    margin: 3vh auto;
+    font-size: smaller;
 }

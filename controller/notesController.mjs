@@ -1,24 +1,19 @@
-import {noteStore as store} from "../services/store_noteEntries";
-
-const actor = "somebody";
+import { noteStore as store } from "../services/store_noteEntries";
 
 export class NotesController {
     
     async getNoteEntries(req, res) {
-        res.json((await store.allEntries(actor) || []));
+        res.json((await store.allEntries() || []));
     };
 
     async getNoteEntry(req, res){
-        res.json(await store.getEntry(req.params.id, actor));
+        res.json(await store.getEntry(req.params.id));
     };
 
-    async addEntry(req, res) {
-        res.json(await store.addEntry(req.body.name, actor));
+    async createModifyEntry(req, res) {
+        res.json(await store.createModifyEntry(req.body));
     };
 
-    async updateEntry(req, res) {
-        res.json(await store.updateEntry(req.body.name, actor));
-    };
 }
 
 export const notesController = new NotesController();

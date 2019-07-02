@@ -19,25 +19,34 @@ export class NoteStore {
         this.db = db || new Datastore({ filename: './data/noteEntries.db', autoload: true });
     }
 
-    async addEntry(due, title, importence, finished, description) {
-        let noteEntry = new NoteEntry(due, title, importence, finished, description);
-        return await this.db.insert(noteEntry);    
+    async createModifyEntry(noteEntry) {
+        console.log(noteEntry);
+        if (noteEntry) {
+            if ((noteEntry._id) && noteEntry._id !== 0){
+                console.log(`update ${noteEntry}`);
+                return await this.updateEntry(noteEntry);
+            } else {
+                console.log(`create ${noteEntry}`);
+                return await this.db.insert(noteEntry);    
+            }
+        }
+        return '{"error": "No note-entry has been delivert"}';
     }
 
-    async updateEntry(id, due, title, importence, finished, description) {
-        await this.db.update({_id: id}, {
+    async updateEntry(noteEntry) {
+        await this.db.update({_id: noteEntry._id}, {
             $set: {
-                "nDue": due,
-                "ntitle": title,
-                "nImportance": importence,
-                "nFinished": finished,
-                "nDescription": description
+                "nDue": noteEntry.nDue,
+                "nTitle": noteEntry.nTitle,
+                "nImportance": noteEntry.nImportence,
+                "nFinished": noteEntry.nFinished,
+                "nDescription": noteEntry.nDescription
             }});
-        return await this.get(id);
+        return await this.getEntry(noteEntry._id);
     }
 
-    async getEntry(id) {
-        return await this.db.findOne({_id: id});
+    async getEntry(entryId) {
+        return await this.db.findOne({_id: entryId});
     }
 
     async allEntries() {

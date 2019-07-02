@@ -11,37 +11,40 @@
 <body>
 <main class="newEntry">
     <h2>Notiz erfassen / ändern</h2>
-    <input id="entry_key" value="0" hidden="true">
+    <form action='localhost:3001/rest' method="POST" enctype="application/json" accept-charset="UTF-8" id="form_id">
+    <input id="entry_key" value=0 hidden="true">
     <section class="row">
         <label for="title">Title</label>
-        <input class="inputborder" id="title">
+        <input class="inputborder" id="title" name=nTitle required>
     </section>
     <section class="row">
         <label for="description">Beschreibung</label>
-        <textarea class="inputborder" id="description"></textarea>
+        <textarea class="inputborder" id="description" name="nDescription" required></textarea>
     </section>
     <section class="row">
         <label for="importance">Wichtigkeit</label>
-        <input class="inputborder" id="importance">
+        <input class="inputborder" id="importance" name="nImportance" required>
     </section>
     <section class="row">
         <label for="done_until">Erledigt bis</label>
-        <input class="inputborder" id="done_until">
+        <input type="date" class="inputborder" id="done_until" name="nDue">
     </section>
     <section class="row">
         <label for="task_finished">Abgeschlossen</label>
-        <input type="checkbox" class="inputborder" id="task_finished">
+        <input type="checkbox" class="inputborder" id="task_finished" mame="nFinished">
     </section>
-    <section class="creation" hidden="true">
-        <label for="creation_date">Erfasst</label>
-        <input class="inputborder" id="creation_date">
+    <section class="creation">
+        <label for="creation_date" hidden="true">Erfasst</label>
+        <input tyype="date" class="inputborder" id="creation_date" name="nCreationDate" hidden="true">
+    </section>
+    <section class="buttonsNewEntry">
+        <input type="submit" class="button begin" id="save_button" value="Speichern" />
+        <span></span>
+        <button class="button end" id="cancel_button">Cancel</button>
     </section>
 </main>
-<aside class="buttonsNewEntry">
-    <button class="button begin" id="save_button">Speichern</button>
-    <span></span>
-    <button class="button end" id="cancel_button">Cancel</button>
-</aside>
+</form>
+<footer>CAS-FEE-2019 Project 1 - Reto Weber</footer>
 
 <script type="module" src="js/dataNoteEntry.js"></script>
 <script type="module" src="js/dataModel.js"></script>
