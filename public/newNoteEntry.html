@@ -11,7 +11,7 @@
 <body>
 <main class="newEntry">
     <h2>Notiz erfassen / ändern</h2>
-    <form action='localhost:3001/rest' method="POST" enctype="application/json" accept-charset="UTF-8" id="form_id">
+    <form id="form_id">
     <input id="entry_key" value=0 hidden="true">
     <section class="row">
         <label for="title">Title</label>
@@ -38,12 +38,12 @@
         <input tyype="date" class="inputborder" id="creation_date" name="nCreationDate" hidden="true">
     </section>
     <section class="buttonsNewEntry">
-        <input type="submit" class="button begin" id="save_button" value="Speichern" />
+        <input type="submit" class="button begin" id="save_button" value="Speichern">
         <span></span>
         <button class="button end" id="cancel_button">Cancel</button>
     </section>
+    </form>
 </main>
-</form>
 <footer>CAS-FEE-2019 Project 1 - Reto Weber</footer>
 
 <script type="module" src="js/dataNoteEntry.js"></script>

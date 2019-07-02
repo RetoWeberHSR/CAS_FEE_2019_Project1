@@ -11,8 +11,8 @@ const Controller = {
         renderEntryToUI(view, entry);
 
         // save
-        view.querySelector("form_id").onsubmit = function () {
-            //view.getElementById("save_button").onclick = function (
+        view.querySelector("#form_id").onsubmit = function () {
+            //view.getElementById("save_button").onclick = function (){
             //const entry = getRenderedEntry(view);
             //model.storeEntry(entry);
             window.location.replace("index.html");
@@ -25,8 +25,11 @@ const Controller = {
 };
 
 function getRenderedEntry(view) {
-    let entry = new NoteEntry()
-    entry._id = view.getElementById("entry_key").value;
+    let entry = new NoteEntry();
+    const entryId = view.getElementById("entry_key").value;
+    if (entryId && entryid !== 0 && entryId != '0') {
+        entry._id = view.getElementById("entry_key").value;
+    }   
     entry.nDue = view.getElementById("done_until").value;
     entry.nTitle = view.getElementById("title").value;
     entry.nImportence = view.getElementById("importance").value;
