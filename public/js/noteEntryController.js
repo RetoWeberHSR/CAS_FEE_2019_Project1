@@ -1,11 +1,9 @@
-"use strict";
-
-import { datamodel as model } from './dataModel.js';
+import { model } from './model.js';
 import { NoteEntry } from './dataNoteEntry.js';
 
 
-const Controller = {
-    bootstrap: function (view) {
+export class NoteEntryController {
+    static bootstrap(view) {
         view.getElementById("style_link").setAttribute("href", model.getCSSLink(null));
         let entry = model.loadSessionEntryKey();
         renderEntryToUI(view, entry);
@@ -22,7 +20,7 @@ const Controller = {
             window.location.replace("index.html");
         };
     }
-};
+}
 
 function getRenderedEntry(view) {
     let entry = new NoteEntry();
@@ -51,4 +49,4 @@ function renderEntryToUI(view, entry){
     }
 }
 
-export { Controller }
+document.addEventListener('DOMContentLoaded', NoteEntryController.bootstrap);

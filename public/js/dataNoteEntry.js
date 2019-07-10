@@ -1,4 +1,4 @@
-"use strict";
+
 
 export class NoteEntry {
     constructor(key, due, title, importence, finished, description, creation){

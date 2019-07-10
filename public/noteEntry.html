@@ -6,7 +6,7 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/basics.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
-    <link rel="stylesheet" type="text/css" href="css/newNoteEntry.css">
+    <link rel="stylesheet" type="text/css" href="css/noteEntry.css">
 </head>
 <body>
 <main class="newEntry">
@@ -47,19 +47,17 @@
 <footer>CAS-FEE-2019 Project 1 - Reto Weber</footer>
 
 <script type="module" src="js/dataNoteEntry.js"></script>
-<script type="module" src="js/dataModel.js"></script>
-<script type="module" src="js/newNoteEntryController.js"></script>
-<script type="module" src="js/StyleSheetModule.js"></script>
+<script type="module" src="js/model.js"></script>
+<script type="module" src="js/dataAccess.js"></script>
+<script type="module" src="js/appStorage.js"></script>
+<script type="module" src="js/noteEntryController.js"></script>
+<script type="module" src="js/styleSheetModel.js"></script>
 
 <script type="module">
 
-    import { Controller } from './js/newNoteEntryController.js';
-    // bootstrapping
-    window.onload = function () {
-        Controller.bootstrap(
-            document
-        );
-    }
+    import { NoteEntryController } from './js/noteEntryController.js';
+
+    NoteEntryController.bootstrap(document);
 
 </script>
 

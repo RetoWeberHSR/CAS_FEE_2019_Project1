@@ -1,10 +1,16 @@
-"use strict";
+import { model } from './model.js';
 
-import { datamodel as model } from './dataModel.js';
+export let indexController;
+export class IndexController  {
+    constructor(view){
+        this.view = view;
+    }
 
+    static bootstrap(view) {
+        indexController = new IndexController(view);
 
-const Controller = {
-    bootstrap: function (view) {
+        // sollte das in der Klasse oder im Konstruktor sein?
+        // kann ich die async function direkt hier in der static function aufrufen?
         view.getElementById("style_link").setAttribute("href", model.getCSSLink(null));
         model.getLastStoredStyleValue(view.getElementById("style_box"));
 
@@ -17,23 +23,25 @@ const Controller = {
                 const noteKey = event.target.dataset.entry_key;
                 // load entry to newNoteEntry view for modifing
                 model.storeSessionEntryKey(noteKey);
-                window.location.replace("newNoteEntry.html");
+                window.location.replace("noteEntry.html");
             }
             if (event.target.dataset.order_by) {
                 const orderFlag = event.target.dataset.order_by;
                 model.storeOrderBy(orderFlag);
                 window.location.replace("index.html");
             }
+            if (event.target.dataset.show_finished) {
+
+            }
         });
 
-    },
-
-    getStoredEntries: function () {
-         return model.getStoredEntries();
     }
 
-    
-};
+    async getStoredEntries() {
+         return await model.getStoredEntries();
+    }
 
-export  { Controller }
+}
+
+document.addEventListener('DOMContentLoaded', IndexController.bootstrap);
 
