@@ -17,7 +17,7 @@ app.get("/", function(req, res){
 });
 
 
-app.use("/", notesRoutes);
+app.use("/rest/", notesRoutes);
 
 
 const hostname = '127.0.0.1';
