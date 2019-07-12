@@ -2,14 +2,14 @@ import Datastore  from 'nedb-promise'
 
 
 export class NoteEntry {
-    constructor(key, due, title, importence, finished, description, creation){
-        this._id = key;
+    constructor(due, title, importance, description){
         this.nDue = due;
         this.nTitle = title;
-        this.nImportence = importence;
-        this.nFinished = finished | false;
+        this.nImportance = importance;
+        this.nFinished = false;
+        this.nFinishedDate = null;
         this.nDescription = description;
-        this.nCreationDate = creation | JSON.stringify(new Date());
+        this.nCreationDate = new Date();
     }
 }
 
@@ -20,27 +20,27 @@ export class NoteStore {
     }
 
     async createModifyEntry(noteEntry) {
-        console.log(noteEntry);
         if (noteEntry) {
             if ((noteEntry._id) && noteEntry._id !== 0){
-                console.log(`update ${noteEntry}`);
                 return await this.updateEntry(noteEntry);
             } else {
-                console.log(`create ${noteEntry}`);
-                return await this.db.insert(noteEntry);    
+                const newNote = new NoteEntry(noteEntry.nDue, noteEntry.nTitle, noteEntry.nImportance, noteEntry.nDescription);
+                return await this.db.insert(newNote);    
             }
         }
-        return '{"error": "No note-entry has been delivert"}';
+        return '{"error": "No note-entry has been delivert correctly"}';
     }
 
     async updateEntry(noteEntry) {
+        noteEntry = validateFinishedAndSetsDate(noteEntry);
         await this.db.update({_id: noteEntry._id}, {
             $set: {
                 "nDue": noteEntry.nDue,
                 "nTitle": noteEntry.nTitle,
-                "nImportance": noteEntry.nImportence,
+                "nImportance": noteEntry.nImportance,
                 "nFinished": noteEntry.nFinished,
-                "nDescription": noteEntry.nDescription
+                "nDescription": noteEntry.nDescription,
+                "nFinishedDate": noteEntry.nFinishedDate
             }});
         return await this.getEntry(noteEntry._id);
     }
@@ -52,6 +52,17 @@ export class NoteStore {
     async allEntries() {
         return await this.db.find({});
     }
+}
+
+function validateFinishedAndSetsDate(noteEntry){
+    if (noteEntry.nFinished && noteEntry.nFinished === true) {
+      if (!noteEntry.nFinishedDate) {
+        noteEntry.nFinishedDate = new Date();
+      }
+    } else {
+        noteEntry.nCreationDate = null;
+    }
+    return noteEntry;
 }
 
 

@@ -5,6 +5,11 @@ export class NotesController {
     async getNoteEntries(req, res) {
         res.json((await store.allEntries() || []));
     };
+    
+    async getFinished(req, res){
+        const entries = (await store.allEntries() || []);
+        res.json(entries.filter(entry => entry.nFinished === true));
+    };
 
     async getNoteEntry(req, res){
         res.json(await store.getEntry(req.params.id));
