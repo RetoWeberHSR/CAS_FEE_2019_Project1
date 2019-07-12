@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/basics.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
     <link rel="stylesheet" type="text/css" href="css/noteEntry.css">
+    <script type="module" src="js/noteEntryBootstrapper.js" defer></script>
 </head>
 <body>
 <main class="newEntry">
@@ -23,7 +24,13 @@
     </section>
     <section class="row">
         <label for="importance">Wichtigkeit</label>
-        <input class="inputborder" id="importance" name="nImportance" required>
+        <select class="inputborder" id="importance" name="nImportance" required>
+            <option value="1">1 - low</option>
+            <option value="2">2 - middle</option>
+            <option value="3">3 - asap</option>
+            <option value="4">4 - high</option>
+            <option value="5">5 - high</option>
+        </select>
     </section>
     <section class="row">
         <label for="done_until">Erledigt bis</label>
@@ -45,21 +52,6 @@
     </form>
 </main>
 <footer>CAS-FEE-2019 Project 1 - Reto Weber</footer>
-
-<script type="module" src="js/dataNoteEntry.js"></script>
-<script type="module" src="js/model.js"></script>
-<script type="module" src="js/dataAccess.js"></script>
-<script type="module" src="js/appStorage.js"></script>
-<script type="module" src="js/noteEntryController.js"></script>
-<script type="module" src="js/styleSheetModel.js"></script>
-
-<script type="module">
-
-    import { NoteEntryController } from './js/noteEntryController.js';
-
-    NoteEntryController.bootstrap(document);
-
-</script>
 
 </body>
 </html>

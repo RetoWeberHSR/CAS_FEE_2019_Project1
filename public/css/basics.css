@@ -31,3 +31,9 @@ span{
 .button.end{
     align-self: flex-end;
 }
+
+.button.selected {
+    font-style: italic;
+    font-weight: bold;
+    color:white;
+}

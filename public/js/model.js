@@ -1,6 +1,3 @@
-import { styleModel } from './styleSheetModel.js';
-import { dataAccess } from './dataAccess.js';
-import { appStorage } from './appStorage.js';
 
 const SESSION_NOTE_ENTRY_KEY = "noteAppEntryKey";
 const SESSION_ORDERBY_KEY = "noteAppOrderBy"
@@ -8,14 +5,16 @@ const SESSION_NOTE_FINISHED = "noteAppFinished"
 
 export class Model {
 
-    constructor(dataAccess, appStorage){
+    constructor(dataAccess, appStorage, styleModel){
         this.dataAccess = dataAccess;
         this.appStorage = appStorage;
+        this.styleModel = styleModel;
     };
 
     async getStoredEntries() {
-        const entries = await this.dataAccess.getStoredEntries();
-        return _sortOrFilterEntries(entries);
+        const allOrFinished = this.appStorage.getSessionItem(SESSION_NOTE_FINISHED);
+        const entries = await this.dataAccess.getStoredEntries(allOrFinished);
+        return _sortEntries(entries);
     }
 
     async storeEntry(noteEntry) {
@@ -31,50 +30,38 @@ export class Model {
         this.appStorage.setSessionItem(SESSION_NOTE_ENTRY_KEY, noteKey);
     }
 
-    storeOrderBy(orderBy) {
+    storeFlagOrderBy(orderBy) {
         this.appStorage.setSessionItem(SESSION_ORDERBY_KEY, orderBy);
     }
 
-    storeNoteFinished(mode) {
-        this.appStorage.setSessionItem(SESSION_NOTE_FINISHED, mode);
+    storeFlagNoteFinished(allOrFinished) {
+        this.appStorage.setSessionItem(SESSION_NOTE_FINISHED, allOrFinished);
     }
 
     getCSSLink(styleSelectBoxId) {
-        // default selection value
-        return styleModel.getCSSLink(styleSelectBoxId);
+        return this.styleModel.getCSSLink(styleSelectBoxId);
     }
 
     getLastStoredStyleValue(styleSelectBoxId){
-        return styleModel.getStyleValue(styleSelectBoxId);
+        return this.styleModel.getStyleValue(styleSelectBoxId);
     }
 }
 
-function _sortOrFilterEntries(entries) {
+function _sortEntries(entries) {
     const orderBy = this.appStorage.getSessionItem(SESSION_ORDERBY_KEY); 
-    let filteredEntries = _filterEntries(entries);  
     let entriesSorted;
-    // sorting
     if (orderBy == 'finished'){
-        entriesSorted = filteredEntries;
+        // sort only finished with finished dates ascending.
+        entriesSorted = entries.filter(entry => entry.nfinished === true).sort((a, b) => (a.nfinishedDate < b.nfinishedDate) ? 1 : 0);
     }
     else if (orderBy == 'importance'){
-        entriesSorted =filteredEntries;
+        // sort desending
+        entriesSorted = entries.sort((a, b) => (a.nImportance < b.nImportance) ?  -1 : 0);
     }
     else {
         // orderBy == 'creation_date'
-        entriesSorted = filteredEntries;
+        entriesSorted =entries.sort((a, b) => (a.nCreationDate < b.nCreationDate) ? -1 : 0) ;
     }
     return entriesSorted;
 }
 
-function _filterEntries(entries) {
-    const filterFinished = this.appStorage.getSessionItem(SESSION_NOTE_FINISHED); 
-    if (filterFinished == 'show_finished'){
-        return entries.filter(entry => entry.nFinished === true);
-    } else {
-        // show all
-        return entries;
-    }
-}
-
-export const model = new Model(dataAccess, appStorage);

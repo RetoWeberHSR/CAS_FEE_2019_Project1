@@ -1,47 +1,52 @@
-import { model } from './model.js';
 
-export let indexController;
-export class IndexController  {
-    constructor(view){
+export class IndexController {
+    constructor(model, view){
+        this.model = model;
         this.view = view;
+        this.noteTableContainer = this.view.getElementById("notetable-container");
+        this.noteTableTemplate = Handlebars.compile(this.view.getElementById("notetable-template").innerHTML);
     }
 
-    static bootstrap(view) {
-        indexController = new IndexController(view);
-
-        // sollte das in der Klasse oder im Konstruktor sein?
-        // kann ich die async function direkt hier in der static function aufrufen?
-        view.getElementById("style_link").setAttribute("href", model.getCSSLink(null));
-        model.getLastStoredStyleValue(view.getElementById("style_box"));
-
-        view.getElementById("style_box").onchange = function() {
-            view.getElementById("style_link").setAttribute("href", model.getCSSLink(view.getElementById("style_box")));
-        };
-
-        view.body.addEventListener("click", function(event) {
+    initEventHandler() {
+        this.view.body.addEventListener("click", async (event) => {
             if (event.target.dataset.entry_key) {
                 const noteKey = event.target.dataset.entry_key;
                 // load entry to newNoteEntry view for modifing
-                model.storeSessionEntryKey(noteKey);
+                this.model.storeSessionEntryKey(noteKey);
                 window.location.replace("noteEntry.html");
+                await this.renderNoteTable();
             }
             if (event.target.dataset.order_by) {
                 const orderFlag = event.target.dataset.order_by;
-                model.storeOrderBy(orderFlag);
+                this.model.storeFlagOrderBy(orderFlag);
                 window.location.replace("index.html");
             }
             if (event.target.dataset.show_finished) {
-
+                const filterFlag = event.target.dataset.show_finished;
+                this.model.storeFlagNoteFinished(filterFlag);
             }
         });
-
     }
 
-    async getStoredEntries() {
-         return await model.getStoredEntries();
+    init() {
+        this.initStyle();
+        this.initEventHandler();
+        this.renderNoteTable();
+    }
+
+    initStyle() {
+        this.view.getElementById("style_link").setAttribute("href", this.model.getCSSLink(null));
+        this.model.getLastStoredStyleValue(this.view.getElementById("style_box"));
+
+        this.view.getElementById("style_box").onchange = () => {
+            this.view.getElementById("style_link").setAttribute("href", this.model.getCSSLink(this.view.getElementById("style_box")));
+        };
+    }
+
+    async renderNoteTable(){
+        const noteList = await this.model.getStoredEntries();
+        this.noteTableContainer.innerHTML = this.noteTableTemplate(noteList);
     }
 
 }
-
-document.addEventListener('DOMContentLoaded', IndexController.bootstrap);
 

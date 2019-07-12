@@ -1,24 +1,39 @@
-import { model } from './model.js';
-import { NoteEntry } from './dataNoteEntry.js';
-
 
 export class NoteEntryController {
-    static bootstrap(view) {
-        view.getElementById("style_link").setAttribute("href", model.getCSSLink(null));
-        let entry = model.loadSessionEntryKey();
-        renderEntryToUI(view, entry);
+    constructor(model, view){
+        this.model = model;
+        this.view = view;
+    }
+
+    init() {
+        this.view.getElementById("style_link").setAttribute("href", this.model.getCSSLink(null));
+        let entry = this.model.loadSessionEntryKey();
+        renderEntryToUI(this.view, entry);
 
         // save
-        view.querySelector("#form_id").onsubmit = function () {
+        this.view.querySelector("#form_id").onsubmit = function () {
             //view.getElementById("save_button").onclick = function (){
             //const entry = getRenderedEntry(view);
             //model.storeEntry(entry);
             window.location.replace("index.html");
         };
         // cancel
-        view.getElementById("cancel_button").onclick = function () {
+        this.view.getElementById("cancel_button").onclick = function () {
             window.location.replace("index.html");
         };
+    }
+}
+
+class NoteEntry {
+    constructor(key, due, title, importance, finished, finishedDate, description, creation){
+        this._id = key;
+        this.nDue = due;
+        this.nTitle = title;
+        this.nImportance = importance;
+        this.nFinished = finished | false;
+        this.nFinishedDate = finishedDate;
+        this.nDescription = description;
+        this.nCreationDate = creation | JSON.stringify(new Date());
     }
 }
 
@@ -48,5 +63,3 @@ function renderEntryToUI(view, entry){
         view.getElementById("creation_date").value = entry.nCreationDate;
     }
 }
-
-document.addEventListener('DOMContentLoaded', NoteEntryController.bootstrap);

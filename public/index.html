@@ -7,6 +7,21 @@
     <link rel="stylesheet" type="text/css" href="css/basics.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="module" src="js/indexBootstrapper.js" defer></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script id="notetable-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <section class="entry_row">
+            <div class="txtcol">{{this.nDue}}</div>
+            <div class="txtcol">{{this.nTitle}}</div>
+            <div class="txtcol">{{this.nImportence}}</div>
+            <label>finished<input type="checkbox" protected="true" value="{{this.nFinished}}"></label>
+                <textarea readonly>{{this.nDescription}}</textarea>
+            <div class="txtcol">{{this.nFinishedDate}}</div>   
+            <button data-entry_key="{{this._id}}" class="editbutton">Edit</button>
+        </section>
+        {{/each}}
+    </script>
 </head>
 <body>
     <header class="button_region">
@@ -20,30 +35,13 @@
         </div>
         <div class="hrow2">
             <button class="button" data-order_by="finished">By finish date</button>
-            <button class="button" data-order_by="creation_date">created date</button>
+            <button class="button selected" data-order_by="creation_date">created date</button>
             <button class="button" data-order_by="importance">By importance</button>
             <span></span>
             <button class="button end" data-show_finished="show_finished">Show finished</button>
         </div>
     </header>
-    <main id="notetable">
-
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-        <script id="notetable-template" type="text/x-handlebars-template">
-            {{#each this}}
-            <section class="entry_row">
-                <div class="txtcol">{{this.nDue}}</div><div class="txtcol">{{this.nTitle}}</div>
-                <div class="txtcol">{{this.nImportence}}</div>
-                <label>finished<input type="checkbox" protected="true" value="{{this.nFinished}}"></label>
-                    <textarea readonly>{{this.nDescription}}</textarea>
-                <button data-entry_key="{{this._id}}" class="editbutton">Edit</button>
-            </section>
-            {{/each}}
-        </script>
-
+    <main id="notetable-container">
     </main>
-
-    <script type="module" src="js/indexController.js" defer></script>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-class AppStorage {
+export class AppStorage {
 
     getSessionItem(key) {
         return sessionStorage.getItem(key);
@@ -17,5 +17,3 @@ class AppStorage {
     }
         
 }
-
-export const appStorage = new AppStorage();

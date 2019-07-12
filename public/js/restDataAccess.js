@@ -1,10 +1,10 @@
 const HEADERS = new Headers({'Content-Type': 'application/json'})
 
-class DataAccess {
+export class RestDataAccess {
    
-    async getStoredEntries() {
-        console.log('start fetching entries');
-        return await ajaxCall('GET', '', undefined);
+    async getStoredEntries(allOrFinished) {
+        const urlParam = (allOrFinished && allOrFinished === 'Finished') ? 'finished' : '';
+        return await ajaxCall('GET', urlParam, undefined);
     }
 
     async storeEntry(noteEntry) {
@@ -19,13 +19,11 @@ class DataAccess {
     ajaxCall(method, urlParam, bodyData) {
         return fetch(`./rest/${urlParam}`, {
             method: method,
-            headers: HEADERS
-            (bodyData) ? `, body: JSON.stringify(${bodyData})`: ''
+            headers: HEADERS,
+            body: (bodyData) ?  `JSON.stringify(${bodyData})`: null
         }).then(response => {
             return response.json();
         });
     }
 
 }
-
-export const dataAccess = new DataAccess();

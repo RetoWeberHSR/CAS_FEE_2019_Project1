@@ -1,4 +1,3 @@
-import { appStorage } from './appStorage.js';
 
 // module to manage used styles
 const NOTE_APP_STYLE_STORE_VALUE = 'noteAppStyleVal';
@@ -45,6 +44,3 @@ function _convertSelectionValueToStyleLink(selectedValue){
     }
     return style;
 }
-
-
-export const styleModel = new StyleModel(appStorage);
