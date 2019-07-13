@@ -14,22 +14,22 @@
     width: 99%;
 }
 
-select#style_box{
+select#style_box {
     flex: 0.2;
     min-width: 156px;
 }
 
-textarea{
+textarea {
     min-width: 140px;
-    max-width: 140px;
-    width: 140px;
+    max-width: 280px;
+    width: 200px;
     min-height: 20px;
-    max-height: 40px;
+    max-height: 60px;
     height: 32px;
     scroll-padding-left: 4px;
 }
 
-section.entry_row{
+section.entry_row {
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -39,7 +39,21 @@ section.entry_row{
 }
 
 .txtcol {
-    width: 132px;
-    flex: 0.25;
+    flex: 0.2;
     border: 1px;
+}
+
+.txtcol2 {
+    flex: 0.3;
+    border: 1px;
+}
+
+.btncol {
+    flex: 0.15;
+    border: 1px;
+}
+
+.entry_row.head {
+    font-size: 1.1em;
+    font-weight: bold;
 }

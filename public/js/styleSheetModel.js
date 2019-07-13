@@ -1,5 +1,5 @@
 
-// module to manage used styles
+// module to manage styles
 const NOTE_APP_STYLE_STORE_VALUE = 'noteAppStyleVal';
 
 export class StyleModel {
@@ -9,7 +9,6 @@ export class StyleModel {
     }
 
     getCSSLink(styleSelectBoxId) {
-            // default selection value
         let selectedValue;
         if (styleSelectBoxId !== null){
             selectedValue = styleSelectBoxId.options[styleSelectBoxId.selectedIndex].value;

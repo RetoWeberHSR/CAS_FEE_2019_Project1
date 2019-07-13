@@ -8,17 +8,30 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script type="module" src="js/indexBootstrapper.js" defer></script>
+    <script type="text/javascript" src="libs/moment-min.js"></script>
+    <script type="text/javascript" src="scripts/handlbar-helper.js" defer></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
     <script id="notetable-template" type="text/x-handlebars-template">
+        <section class="entry_row head">
+            <div class="txtcol">To be done</div>
+            <div class="txtcol">title</div>
+            <div class="txtcol">importance</div>
+            <div class="txtcol">created</div>
+            <div class="txtcol2">description</div>
+            <div class="txtcol">finished</div>   
+            <div class="btncol"></div>
+        </section>
         {{#each this}}
         <section class="entry_row">
-            <div class="txtcol">{{this.nDue}}</div>
+            <div class="txtcol">{{formatDate this.nDue}}</div>
             <div class="txtcol">{{this.nTitle}}</div>
-            <div class="txtcol">{{this.nImportence}}</div>
-            <label>finished<input type="checkbox" protected="true" value="{{this.nFinished}}"></label>
-                <textarea readonly>{{this.nDescription}}</textarea>
-            <div class="txtcol">{{this.nFinishedDate}}</div>   
-            <button data-entry_key="{{this._id}}" class="editbutton">Edit</button>
+            <div class="txtcol">{{this.nImportance}}</div>
+            <div class="txtcol">{{formatDate this.nCreationDate}}</div>
+            <div class="txtcol2"><textarea readonly>{{this.nDescription}}</textarea></div>
+            <div class="txtcol">{{formatDate this.nFinishedDate}}</div>
+            <div class="btncol">    
+                <button data-entry_key="{{this._id}}" class="editbutton">Edit</button>
+            </div>
         </section>
         {{/each}}
     </script>
@@ -35,7 +48,7 @@
         </div>
         <div class="hrow2">
             <button class="button" data-order_by="finished">By finish date</button>
-            <button class="button selected" data-order_by="creation_date">created date</button>
+            <button class="button selected" data-order_by="creation_date">By created date</button>
             <button class="button" data-order_by="importance">By importance</button>
             <span></span>
             <button class="button end" data-show_finished="show_finished">Show finished</button>

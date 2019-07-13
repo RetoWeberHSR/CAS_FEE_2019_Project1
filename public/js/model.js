@@ -1,7 +1,7 @@
 
-const SESSION_NOTE_ENTRY_KEY = "noteAppEntryKey";
-const SESSION_ORDERBY_KEY = "noteAppOrderBy"
-const SESSION_NOTE_FINISHED = "noteAppFinished"
+const SESSION_NOTE_ENTRY_KEY = 'noteAppEntryKey';
+const SESSION_ORDERBY_KEY = 'noteAppOrderBy'
+const SESSION_NOTE_FINISHED = 'noteAppFinished'
 
 export class Model {
 
@@ -35,7 +35,18 @@ export class Model {
         this.appStorage.setSessionItem(SESSION_ORDERBY_KEY, orderBy);
     }
 
-    storeFlagNoteFinished(allOrFinished) {
+    getStoredFlagOrderBy() {
+        return this.appStorage.getSessionItem(SESSION_ORDERBY_KEY);
+    }    
+
+    getStoredFlagFinished() {
+        return this.appStorage.getSessionItem(SESSION_NOTE_FINISHED);
+    }
+
+    toggleFlagFinished() {
+        const storedFlag = this.getStoredFlagFinished();
+        const isAlreadyActivated = ((storedFlag) && (storedFlag === 'finished'));
+        const allOrFinished = (isAlreadyActivated) ? 'all' : 'finished';
         this.appStorage.setSessionItem(SESSION_NOTE_FINISHED, allOrFinished);
     }
 
@@ -51,12 +62,14 @@ export class Model {
 function _sortEntries(entries, orderBySetting) { 
     const orderBy = (orderBySetting) ? orderBySetting : '';
     if (orderBy == 'finished') {
-        // sort only finished with finished dates ascending.
-        return entries.filter(entry => entry.nfinished === true).sort((a, b) => (a.nfinishedDate < b.nfinishedDate) ? 1 : 0);
+        // sort only finished with finished dates descending.
+        const finishedNotes = entries.filter(entry => entry.nFinished === true);
+        const notFinished = entries.filter(entry => entry.nFinished !== true);
+        return finishedNotes.sort((a, b) => (a.nFinishedDate > b.nFinishedDate) ? -1 : 0).concat(notFinished);
     }
     else if (orderBy == 'importance'){
-        // sort desending
-        return entries.sort((a, b) => (a.nImportance < b.nImportance) ?  -1 : 0);
+        // sort descending
+        return entries.sort((a, b) => (a.nImportance > b.nImportance) ?  -1 : 0);
     }
     else {
         // orderBy == 'creation_date'

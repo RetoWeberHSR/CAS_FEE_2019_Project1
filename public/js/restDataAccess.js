@@ -3,7 +3,7 @@ const HEADERS = new Headers({'Content-Type': 'application/json'})
 export class RestDataAccess {
    
     async getStoredEntries(allOrFinished) {
-        const urlParam = (allOrFinished && allOrFinished === 'Finished') ? 'finished' : '';
+        const urlParam = (allOrFinished && allOrFinished === 'finished') ? 'finished' : '';
         return await this.ajaxCall('GET', urlParam, undefined);
     }
 
