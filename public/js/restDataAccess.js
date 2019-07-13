@@ -4,16 +4,16 @@ export class RestDataAccess {
    
     async getStoredEntries(allOrFinished) {
         const urlParam = (allOrFinished && allOrFinished === 'Finished') ? 'finished' : '';
-        return await ajaxCall('GET', urlParam, undefined);
+        return await this.ajaxCall('GET', urlParam, undefined);
     }
 
     async storeEntry(noteEntry) {
         // send entry to the server
-        return await ajaxCall('POST', '', noteEntry); 
+        return await this.ajaxCall('POST', '', noteEntry); 
     }
 
     async getEntry(entryId) {
-        return await ajaxCall('GET', entryId, undefined); 
+        return await this.ajaxCall('GET', entryId, undefined); 
     }
     
     ajaxCall(method, urlParam, bodyData) {

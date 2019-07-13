@@ -14,16 +14,16 @@ export class IndexController {
                 // load entry to newNoteEntry view for modifing
                 this.model.storeSessionEntryKey(noteKey);
                 window.location.replace("noteEntry.html");
-                await this.renderNoteTable();
             }
             if (event.target.dataset.order_by) {
                 const orderFlag = event.target.dataset.order_by;
                 this.model.storeFlagOrderBy(orderFlag);
-                window.location.replace("index.html");
+                await this.renderNoteTable();
             }
             if (event.target.dataset.show_finished) {
                 const filterFlag = event.target.dataset.show_finished;
                 this.model.storeFlagNoteFinished(filterFlag);
+                await this.renderNoteTable();
             }
         });
     }

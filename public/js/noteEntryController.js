@@ -7,7 +7,7 @@ export class NoteEntryController {
 
     init() {
         this.view.getElementById("style_link").setAttribute("href", this.model.getCSSLink(null));
-        let entry = this.model.loadSessionEntryKey();
+        let entry = this.model.getStoredEntryBySessionKey();
         renderEntryToUI(this.view, entry);
 
         // save

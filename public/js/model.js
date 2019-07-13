@@ -14,14 +14,15 @@ export class Model {
     async getStoredEntries() {
         const allOrFinished = this.appStorage.getSessionItem(SESSION_NOTE_FINISHED);
         const entries = await this.dataAccess.getStoredEntries(allOrFinished);
-        return _sortEntries(entries);
+        const orderBySetting = this.appStorage.getSessionItem(SESSION_ORDERBY_KEY);
+        return _sortEntries(entries, orderBySetting);
     }
 
     async storeEntry(noteEntry) {
         await this.dataAccess.storeEntry(noteEntry);
     }
 
-    async loadSessionEntryKey() {
+    async getStoredEntryBySessionKey() {
         const entryKey = this.appStorage.getSessionItem(SESSION_NOTE_ENTRY_KEY);
         return await this.dataAccess.getEntry(entryKey);
     }
@@ -47,21 +48,19 @@ export class Model {
     }
 }
 
-function _sortEntries(entries) {
-    const orderBy = this.appStorage.getSessionItem(SESSION_ORDERBY_KEY); 
-    let entriesSorted;
-    if (orderBy == 'finished'){
+function _sortEntries(entries, orderBySetting) { 
+    const orderBy = (orderBySetting) ? orderBySetting : '';
+    if (orderBy == 'finished') {
         // sort only finished with finished dates ascending.
-        entriesSorted = entries.filter(entry => entry.nfinished === true).sort((a, b) => (a.nfinishedDate < b.nfinishedDate) ? 1 : 0);
+        return entries.filter(entry => entry.nfinished === true).sort((a, b) => (a.nfinishedDate < b.nfinishedDate) ? 1 : 0);
     }
     else if (orderBy == 'importance'){
         // sort desending
-        entriesSorted = entries.sort((a, b) => (a.nImportance < b.nImportance) ?  -1 : 0);
+        return entries.sort((a, b) => (a.nImportance < b.nImportance) ?  -1 : 0);
     }
     else {
         // orderBy == 'creation_date'
-        entriesSorted =entries.sort((a, b) => (a.nCreationDate < b.nCreationDate) ? -1 : 0) ;
+        return entries.sort((a, b) => (a.nCreationDate < b.nCreationDate) ? -1 : 0) ;
     }
-    return entriesSorted;
 }
 
