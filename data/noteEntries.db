@@ -1,3 +1,5 @@
-{"_id":"MZxDDa5LGld8KFCR","nTitle":"Task 11","nImportence":"2","nFinished":"0","nDescription":"Bez. zu Task 11","nDue":"2019-07-22T00:00:00.00.511Z","nCreationDate":"2019-07-02T00:00:00.00.511Z"}
-{"_id":"MgNPaoIfemYdnCbP","nTitle":"Task 9","nImportence":"3","nFinished":"1","nDescription":" Bez. zu Task 9","nDue":"2019-06-27T00:00:00.00.511Z","nCreationDate":"2019-06-29T00:00:00.00.511Z"}
-{"_id":"rTAnTiq7LInD5R7E","nTitle":"Task 12","nImportence":"1","nFinished":"0","nDescription":"Ein Text zu Task 12","nDue":"2019-08-19T00:00:00.00.511Z","nCreationDate":"2019-07-01T00:00:00.00.511Z"}
+{"_id":"MZxDDa5LGld8KFCR","nTitle":"Task 11","nImportance":"2","nFinished":"0","nDescription":"Bez. zu Task 11","nDue":"2019-07-22T00:00:00.00.511Z","nCreationDate":"2019-07-02T00:00:00.00.511Z"}
+{"_id":"MgNPaoIfemYdnCbP","nTitle":"Task 9","nImportance":"3","nFinished":"1","nDescription":" Bez. zu Task 9","nDue":"2019-06-27T00:00:00.00.511Z","nCreationDate":"2019-06-29T00:00:00.00.511Z"}
+{"nDue":"2019-07-18T00:00:00.00.511Z","nTitle":"Task G8","nImportance":"5","nFinished":true,"nFinishedDate":"2019-07-15T13:32:37.975Z","nDescription":" Important task","nCreationDate":"2019-07-01T00:00:00.00.511Z","_id":"fF6XXyuC57b93Zc2"}
+{"nDue":"2019-07-19T00:00:00.00.511Z","nTitle":"Task G7","nImportance":"2","nFinished":true,"nFinishedDate":"2019-07-13T17:48:47.975Z","nDescription":" Inserted and updated with Postman update 1","nCreationDate":{"$$date":1563032951966},"_id":"rFrXXyuC57bL3Zc4"}
+{"_id":"rTAnTiq7LInD5R7E","nTitle":"Task 12","nImportance":"1","nFinished":"0","nDescription":"Ein Text zu Task 12","nDue":"2019-08-19T00:00:00.00.511Z","nCreationDate":"2019-07-01T00:00:00.00.511Z"}
