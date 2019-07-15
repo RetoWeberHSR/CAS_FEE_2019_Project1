@@ -29,7 +29,7 @@ export class StyleModel {
             return storedStyle;
         }
         // set default style value
-        return "white";
+        return 'white';
     }
 }
 

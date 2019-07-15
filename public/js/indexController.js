@@ -11,7 +11,6 @@ export class IndexController {
         this.view.body.addEventListener('click', async (event) => {
             if (event.target.dataset.entry_key) {
                 const noteKey = event.target.dataset.entry_key;
-                // load entry to newNoteEntry view for modifing
                 this.model.storeSessionEntryKey(noteKey);
                 window.location.replace('noteEntry.html');
             }
@@ -51,7 +50,7 @@ export class IndexController {
         
         const finishedFlag = this.model.getStoredFlagFinished();
         const showFinishedButton = this.view.querySelector('[data-show_finished]');
-        if (finishedFlag === 'finished') {
+        if ((finishedFlag) && finishedFlag === 'finished') {
             showFinishedButton.classList.add('selected');
         } else {
             showFinishedButton.classList.remove('selected');

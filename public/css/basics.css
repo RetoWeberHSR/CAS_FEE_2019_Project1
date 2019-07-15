@@ -22,7 +22,7 @@ aside {
 }
 
 main {
-    margin: 4px 5px;
+    margin: 4px 6px;
 }
 span{
     flex: 0.75;
@@ -36,4 +36,9 @@ span{
     font-style: italic;
     font-weight: bold;
     color:white;
+}
+
+input[readonly],
+textarea[readonly] {
+    background-color: lightcyan;
 }

@@ -12,9 +12,9 @@ export class Model {
     };
 
     async getStoredEntries() {
-        const allOrFinished = this.appStorage.getSessionItem(SESSION_NOTE_FINISHED);
+        const allOrFinished = this.getStoredFlagFinished();
         const entries = await this.dataAccess.getStoredEntries(allOrFinished);
-        const orderBySetting = this.appStorage.getSessionItem(SESSION_ORDERBY_KEY);
+        const orderBySetting = this.getStoredFlagOrderBy();
         return _sortEntries(entries, orderBySetting);
     }
 
@@ -36,7 +36,8 @@ export class Model {
     }
 
     getStoredFlagOrderBy() {
-        return this.appStorage.getSessionItem(SESSION_ORDERBY_KEY);
+        const orderByFlag = this.appStorage.getSessionItem(SESSION_ORDERBY_KEY);
+        return (orderByFlag) ? orderByFlag : 'creation_date';
     }    
 
     getStoredFlagFinished() {
@@ -59,8 +60,7 @@ export class Model {
     }
 }
 
-function _sortEntries(entries, orderBySetting) { 
-    const orderBy = (orderBySetting) ? orderBySetting : '';
+function _sortEntries(entries, orderBy) { 
     if (orderBy == 'finished') {
         // sort only finished with finished dates descending.
         const finishedNotes = entries.filter(entry => entry.nFinished === true);
@@ -76,4 +76,3 @@ function _sortEntries(entries, orderBySetting) {
         return entries.sort((a, b) => (a.nCreationDate < b.nCreationDate) ? -1 : 0) ;
     }
 }
-

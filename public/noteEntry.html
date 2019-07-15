@@ -8,50 +8,72 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheetWhite.css" id="style_link">
     <link rel="stylesheet" type="text/css" href="css/noteEntry.css">
     <script type="module" src="js/noteEntryBootstrapper.js" defer></script>
+    <script type="text/javascript" src="libs/moment-min.js"></script>
+    <script type="text/javascript" src="scripts/handlbar-helper.js" defer></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script id="form-template" type="text/x-handlebars-template">
+        {{#each this}}
+        {{#if this._id}}
+        <input name="_id" value="{{this._id}}" hidden="true">
+        {{/if}}
+        <div class="row">
+            <label for="title">Titel</label>
+            <input class="inputborder" name=nTitle value="{{this.nTitle}}" required>
+        </div>
+        <div class="row">
+            <label for="description">Beschreibung</label>
+            <textarea class="inputborder" name="nDescription" required>{{this.nDescription}}</textarea>
+        </div>
+        <div class="row">
+            <label for="importance">Wichtigkeit</label>
+            <select class="inputborder" name="nImportance" required>
+                <option value="1" {{selected this.nImportance "1"}}>1 - low</option>
+                <option value="2" {{selected this.nImportance "2"}}>2 - middle</option>
+                <option value="3" {{selected this.nImportance "3"}}>3 - asap</option>
+                <option value="4" {{selected this.nImportance "4"}}>4 - high</option>
+                <option value="5" {{selected this.nImportance "5"}}>5 - most important</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="done_until">Zu erledigen bis</label>
+            <input type="date" class="inputborder" name="nDue" value="{{#if this.nDue}}{{isoDate this.nDue}}{{/if}}">
+        </div>
+        <div class="row">
+            <label for="task_finished">Abgeschlossen</label>
+            <input type="checkbox" class="inputborder" mame="nFinished" value="{{this.nFinished}}">
+        </div>
+        {{#if this.nFinishedDate}}
+        <div class="row">
+            <label for="task_finished">Abgeschlossen am</label>
+            <input type="date" class="inputborder" mame="nFinishedDate" value="{{isoDate this.nFinishedDate}}" readonly>
+        </div>
+        {{/if}}
+        {{#if  this.nCreationDate}}
+        <div class="row creation">
+            <label for="creation_date">Erfasst</label>
+            <input type="date" class="inputborder" name="nCreationDate" value="{{isoDate this.nCreationDate}}" readonly>
+        </div>
+        {{/if}}
+        {{/each}}
+    </script>
 </head>
 <body>
-<main class="newEntry">
-    <h2>Notiz erfassen / ändern</h2>
-    <form id="form_id">
-    <input id="entry_key" value=0 hidden="true">
-    <section class="row">
-        <label for="title">Title</label>
-        <input class="inputborder" id="title" name=nTitle required>
-    </section>
-    <section class="row">
-        <label for="description">Beschreibung</label>
-        <textarea class="inputborder" id="description" name="nDescription" required></textarea>
-    </section>
-    <section class="row">
-        <label for="importance">Wichtigkeit</label>
-        <select class="inputborder" id="importance" name="nImportance" required>
-            <option value="1">1 - low</option>
-            <option value="2">2 - middle</option>
-            <option value="3" selected>3 - asap</option>
-            <option value="4">4 - high</option>
-            <option value="5">5 - high</option>
-        </select>
-    </section>
-    <section class="row">
-        <label for="done_until">Erledigt bis</label>
-        <input type="date" class="inputborder" id="done_until" name="nDue">
-    </section>
-    <section class="row">
-        <label for="task_finished">Abgeschlossen</label>
-        <input type="checkbox" class="inputborder" id="task_finished" mame="nFinished">
-    </section>
-    <section class="row creation">
-        <label for="creation_date" hidden="true">Erfasst</label>
-        <input tyype="date" class="inputborder" id="creation_date" name="nCreationDate" hidden="true">
-    </section>
-    <section class="buttonsNewEntry">
-        <input type="submit" class="button begin" id="save_button" value="Speichern">
+<main>
+    <h2>Notiz erfassen / ändern</h2>    
+    <form id="form_id" method="POST">
+        <section class="input_new_entry" id=form-container>
+        </section>
+        <nav class="buttons_new_entry">
+            <div class="row">
+                <input type="submit" class="button begin" id="save_button" value="Speichern">
+            </div>
+        </nav>
+    </form>
+    <div class="row">
         <span></span>
         <button class="button end" id="cancel_button">Cancel</button>
-    </section>
-    </form>
+    </div>
 </main>
 <footer>CAS-FEE-2019 Project 1 - Reto Weber</footer>
-
 </body>
 </html>
