@@ -51,8 +51,7 @@ class NewNoteEntry {
 
 function _mapInputToNoteEntry(form) {
     let noteEntry = new NewNoteEntry();
-    for (const elementPair of form){
-        console.log(elementPair);
+    for (const elementPair of form) {
         noteEntry[elementPair[0]] = elementPair[1];
     }
     return noteEntry;
