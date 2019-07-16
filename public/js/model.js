@@ -19,7 +19,7 @@ export class Model {
     }
 
     async storeEntry(noteEntry) {
-        await this.dataAccess.storeEntry(noteEntry);
+        return await this.dataAccess.storeEntry(noteEntry);
     }
 
     async getStoredEntryBySessionKey() {

@@ -23,3 +23,10 @@ Handlebars.registerHelper("selected", function(value1, value2) {
     }
     return "";
 });
+
+Handlebars.registerHelper("checked", function(booleanValue) {
+    if (booleanValue === true) {
+        return "checked";
+    }
+    return "";
+});

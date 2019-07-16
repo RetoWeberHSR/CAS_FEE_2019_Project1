@@ -1,3 +1,4 @@
+const DEFAULT_IMPORTANCE = '3';
 
 export class NoteEntryController {
     constructor(model, view){
@@ -19,14 +20,17 @@ export class NoteEntryController {
         this.formContainer.innerHTML = this.formTemplate(Array.of(noteEntry));
     }
 
-    initEventHandler() {
-        this.view.getElementById('form_id').onsubmit = function () {
-            //view.getElementById("save_button").onclick = function (){
-            //const entry = getRenderedEntry(view);
-            //model.storeEntry(entry);
+    initEventHandler() { 
+        this.view.getElementById('form_id').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            let newEntry = _mapInputToNoteEntry(formData);
+            const finishedCheckbox = this.view.getElementById('nFinished');
+            newEntry.nFinished = finishedCheckbox.checked;
+            await this.model.storeEntry(newEntry);
             window.location.replace('index.html');
-        };
-        this.view.getElementById("cancel_button").onclick = function () {
+        });
+        this.view.getElementById("cancel_button").onclick = () => {
             window.location.replace('index.html');
         };
     }
@@ -34,11 +38,22 @@ export class NoteEntryController {
 
 class NewNoteEntry {
     constructor(){
-        this.nDue = '';
+        this._id = null;
+        this.nDue = null;
+        this.nDescription = '';
         this.nTitle = '';
-        this.nImportance = '3';
+        this.nImportance = DEFAULT_IMPORTANCE;
         this.nFinished = false;
-        this.nFinishedDate = '';
-        this.nDescription = '';   
+        this.nFinishedDate = null;
+        this.nCreationDate = null; 
     }
+}
+
+function _mapInputToNoteEntry(form) {
+    let noteEntry = new NewNoteEntry();
+    for (const elementPair of form){
+        console.log(elementPair);
+        noteEntry[elementPair[0]] = elementPair[1];
+    }
+    return noteEntry;
 }

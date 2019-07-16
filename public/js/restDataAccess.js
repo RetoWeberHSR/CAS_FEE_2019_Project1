@@ -20,7 +20,7 @@ export class RestDataAccess {
         return fetch(`./rest/${urlParam}`, {
             method: method,
             headers: HEADERS,
-            body: (bodyData) ?  `JSON.stringify(${bodyData})`: null
+            body: (bodyData) ?  JSON.stringify(bodyData): null
         }).then(response => {
             return response.json();
         });

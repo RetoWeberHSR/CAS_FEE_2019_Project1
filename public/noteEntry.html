@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <label for="task_finished">Abgeschlossen</label>
-            <input type="checkbox" class="inputborder" mame="nFinished" value="{{this.nFinished}}">
+            <input type="checkbox" class="inputborder" id="nFinished" {{checked this.nFinished}}>
         </div>
         {{#if this.nFinishedDate}}
         <div class="row">
@@ -49,7 +49,7 @@
         </div>
         {{/if}}
         {{#if  this.nCreationDate}}
-        <div class="row creation">
+        <div class="row">
             <label for="creation_date">Erfasst</label>
             <input type="date" class="inputborder" name="nCreationDate" value="{{isoDate this.nCreationDate}}" readonly>
         </div>
@@ -60,12 +60,12 @@
 <body>
 <main>
     <h2>Notiz erfassen / ändern</h2>    
-    <form id="form_id" method="POST">
+    <form id="form_id">
         <section class="input_new_entry" id=form-container>
         </section>
-        <nav class="buttons_new_entry">
+        <nav class="button_new_entry">
             <div class="row">
-                <input type="submit" class="button begin" id="save_button" value="Speichern">
+                <button type="submit" class="button begin">Speichern</button>
             </div>
         </nav>
     </form>
