@@ -23,16 +23,21 @@ export class NoteEntryController {
     initEventHandler() { 
         this.view.getElementById('form_id').addEventListener('submit', async (event) => {
             event.preventDefault();
-            const formData = new FormData(event.target);
-            let newEntry = _mapInputToNoteEntry(formData);
-            const finishedCheckbox = this.view.getElementById('nFinished');
-            newEntry.nFinished = finishedCheckbox.checked;
+            let newEntry = this.mapInputToNoteEntry(event);
             await this.model.storeEntry(newEntry);
             window.location.replace('index.html');
         });
         this.view.getElementById("cancel_button").onclick = () => {
             window.location.replace('index.html');
         };
+    }
+
+    mapInputToNoteEntry(event) {
+        const formData = new FormData(event.target);
+        let newEntry = _mapInputToNoteEntry(formData);
+        const finishedCheckbox = this.view.getElementById('nFinished');
+        newEntry.nFinished = finishedCheckbox.checked;
+        return newEntry;
     }
 }
 

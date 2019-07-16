@@ -8,7 +8,6 @@ export class RestDataAccess {
     }
 
     async storeEntry(noteEntry) {
-        // send entry to the server
         return await this.ajaxCall('POST', '', noteEntry); 
     }
 

@@ -15,5 +15,4 @@ export class IndexBootstrapper {
     }
 }
 
-//document.addEventListener('DOMContentLoaded', async () => await IndexBootstrapper.start());
 document.addEventListener('DOMContentLoaded', IndexBootstrapper.start());
